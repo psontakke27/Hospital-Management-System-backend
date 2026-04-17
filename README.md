@@ -96,3 +96,16 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+#🔑 JwtService 👉 Used to CREATE token , Runs during login ,Generates JWT
+🔒 AuthGuard 👉 Used to VERIFY token , Runs on protected routes ,Checks if request has valid token
+
+Login → JwtService → Token generated 🔑
+            ↓
+Frontend stores token
+            ↓
+API call with token
+            ↓
+AuthGuard checks token 🔒
+            ↓
+Access granted ✅
