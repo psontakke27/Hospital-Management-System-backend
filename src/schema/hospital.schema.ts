@@ -4,10 +4,10 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
 @Schema()
 export class Hospital{
-    @Prop ({required: true})
+    @Prop ({required: true , trim:true, lowercase:true})
     name: string
 
-    @Prop()
+    @Prop({required:true, trim:true,lowercase:true})
     address: string
 
     @Prop()
@@ -15,3 +15,10 @@ export class Hospital{
 }
 
 export const HospitalSchema = SchemaFactory.createForClass(Hospital);
+
+
+// Do not allow two records with the same name AND address combination
+HospitalSchema.index(   
+    { name:1, address:1},
+    { unique:true}
+)
