@@ -21,6 +21,9 @@ export class Room {
 
     @Prop()
     floor?: number;
+
+    @Prop({ required: true, default: 1 })
+    roomMaxCapacity:number;
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);

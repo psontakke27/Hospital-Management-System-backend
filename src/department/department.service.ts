@@ -18,6 +18,7 @@ export class DepartmentService {
     }
 
     async findAll(){
+        console.log("all department ")
         return await this.departmentModel.find().populate('hospitalId');
     }
 

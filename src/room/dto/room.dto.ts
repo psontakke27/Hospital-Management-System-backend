@@ -1,3 +1,4 @@
+import { Prop } from "@nestjs/mongoose";
 import { IsIn, IsMongoId, IsNotEmpty, IsNumber, IsString } from "class-validator"
 
 
@@ -6,7 +7,7 @@ export class CreateRoomDto {
     departmentId: string;
     
     @IsString()
-    @IsIn(["ICU", "General", "Private", "OT"])
+    // @IsIn(["ICU", "General", "Private", "OT"])
     type:string;
 
     @IsString()
@@ -19,4 +20,9 @@ export class CreateRoomDto {
 
     @IsString()
     floor?: number;
+
+    @IsNumber()
+    roomMaxCapacity: number;
+
+    
 }

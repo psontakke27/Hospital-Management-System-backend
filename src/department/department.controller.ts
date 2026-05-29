@@ -9,15 +9,15 @@ export class DepartmentController {
 
     @Post()
     create(@Body() body :CreateDepartmentDto) {
+        console.log("🚀 ~ DepartmentController ~ create ~ body:", body)
         return this.departmentService.create(body);
     }
 
-    @Get()
-    findAll() {
-        return this.departmentService.findAll();
-    }
+    
     @Get(':hospitalId')
     findByHospital(@Body() body,@Param('hospitalId') hospitalId: string){
         return this.departmentService.findByHospital(hospitalId);
     }
+
+
 }

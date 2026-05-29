@@ -16,5 +16,6 @@ export class HospitalController {
         findAll() {
             return this.hospitalService.findAll();
         }
+        
     
 }
