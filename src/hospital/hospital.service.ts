@@ -13,15 +13,17 @@ export class HospitalService {
     constructor(
         @InjectModel(Hospital.name)
         private hospitalModel: Model<Hospital>,
-    ) {}
+    ) { }
 
-    async create(data: CreateHospitalDto){
+    async create(data: CreateHospitalDto) {
         console.log("🚀 ~ HospitalService ~ create ~ data:", data)
         return await this.hospitalModel.create(data);
     }
-
+    async findOne(hospitalName: any) {
+        return await this.hospitalModel.findOne(hospitalName);
+    }
     async findAll() {
-        return await this. hospitalModel.find();
+        return await this.hospitalModel.find();
     }
 
 

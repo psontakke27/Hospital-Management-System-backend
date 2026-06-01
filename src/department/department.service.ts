@@ -10,21 +10,24 @@ export class DepartmentService {
     constructor(
         @InjectModel(Department.name)
         private departmentModel: Model<Department>,
-    ){}
+    ) { }
 
-    async create (data:CreateDepartmentDto) {
+    async create(data: CreateDepartmentDto) {
         console.log("🚀 ~ DepartmentService ~ create ~ data:", data)
         return await this.departmentModel.create(data);
     }
+    async findById(departmentId: any) {
+        return await this.departmentModel.findById(departmentId)
+    }
 
-    async findAll(){
+    async findAll() {
         console.log("all department ")
         return await this.departmentModel.find().populate('hospitalId');
     }
 
     async findByHospital(hospitalId: string) {
         console.log("🚀 ~ DepartmentService ~ findByHospital ~ hospitalId:", hospitalId)
-        return await this.departmentModel.find({ hospitalId}).populate('hospitalId')
+        return await this.departmentModel.find({ hospitalId }).populate('hospitalId')
     }
 
     // .populate This replaces the ID with actual hospital data

@@ -23,7 +23,7 @@ export class Room {
     floor?: number;
 
     @Prop({ required: true, default: 1 })
-    roomMaxCapacity:number;
+    roomMaxCapacity: number;
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);

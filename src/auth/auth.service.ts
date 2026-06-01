@@ -5,14 +5,16 @@ import { User } from 'src/schema/user.schema';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto, SignupDto } from './dto/create-auth.dto';
-
+import { HospitalService } from 'src/hospital/hospital.service';
 
 @Injectable()
 export class AuthService {
 
+
     constructor(
         @InjectModel(User.name) private userModel: Model<User>,
-        private jwtService: JwtService  //injecting JwtService inside service  for create JWT tokens sign data securely later verify tokens (via strategy)
+        private jwtService: JwtService, //injecting JwtService inside service  for create JWT tokens sign data securely later verify tokens (via strategy)
+        private readonly hospitalService: HospitalService
     ) { }
 
     async login(body: LoginDto) {
@@ -37,7 +39,7 @@ export class AuthService {
         const payload = {
             userId: user._id,
             email: user.email,
-            role:user.role,
+            role: user.role,
         };
         console.log("🚀 ~ AuthService ~ login ~ payload:", payload)
         //generate token
@@ -50,11 +52,18 @@ export class AuthService {
         }
     }
 
-    async signup(body: SignupDto ) {
+    async signup(body: SignupDto) {
         try {
-            const { name, email, password } = body;
+            const { hospitalName, firstName, lastName, email, password } = body;
             console.log("🚀 ~   signup ~ password:", password)
             console.log("🚀 ~  signup ~ email:", email)
+
+            let existinghospital = await this.hospitalService.findOne({
+                hospitalName
+            })
+            if (!existinghospital) {
+                throw new BadRequestException("hospital does not exists");
+            }
 
             // check user already present
             const existingUser = await this.userModel.findOne({ email });
@@ -64,16 +73,19 @@ export class AuthService {
             const hashedPassword = await bcrypt.hash(password, 10);
 
             const newUser = new this.userModel({
-                name,
+                hospitalName,
+                firstName,
+                lastName,
                 email,
                 password: hashedPassword,
-                role: body.role || 'user'
+                role: body.role || 'user',
             });
             console.log("🚀 ~ AuthService ~ signup ~ newUser:", newUser)
 
             await newUser.save();
             return {
-                name: name,
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
             }
         } catch (err) {
@@ -83,7 +95,7 @@ export class AuthService {
 
     }
 
-    async 
+
 }
 
 

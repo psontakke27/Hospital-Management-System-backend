@@ -5,17 +5,17 @@ import { CreateDepartmentDto } from './dto/department.dto';
 @Controller('department')
 export class DepartmentController {
 
-    constructor(private readonly departmentService : DepartmentService) {}
+    constructor(private readonly departmentService: DepartmentService) { }
 
     @Post()
-    create(@Body() body :CreateDepartmentDto) {
+    create(@Body() body: CreateDepartmentDto) {
         console.log("🚀 ~ DepartmentController ~ create ~ body:", body)
         return this.departmentService.create(body);
     }
 
-    
+
     @Get(':hospitalId')
-    findByHospital(@Body() body,@Param('hospitalId') hospitalId: string){
+    findByHospital(@Body() body, @Param('hospitalId') hospitalId: string) {
         return this.departmentService.findByHospital(hospitalId);
     }
 
