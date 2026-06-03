@@ -19,8 +19,9 @@ export class HospitalService {
         console.log("🚀 ~ HospitalService ~ create ~ data:", data)
         return await this.hospitalModel.create(data);
     }
-    async findOne(hospitalName: any) {
-        return await this.hospitalModel.findOne(hospitalName);
+    async findOne(name: any) {
+        console.log("🚀 ~ HospitalService ~ findOne ~ hospitalName:", name)
+        return await this.hospitalModel.findOne(name);
     }
     async findAll() {
         return await this.hospitalModel.find();
