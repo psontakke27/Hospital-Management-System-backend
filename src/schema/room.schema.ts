@@ -10,20 +10,32 @@ export class Room {
     @Prop({ type: Types.ObjectId, ref: Department.name, required: true })
     departmentId: Types.ObjectId;
 
-    @Prop({ required: true, enum: ["ICU", "General", "Private", "OT"] })
-    type: string;
-
-    @Prop({ required: true, enum: ['active', 'inactive'] })
-    status: string;
-
+     @Prop({ type: Types.ObjectId, ref: Department.name, required: true })
+    hospitalId: Types.ObjectId;
+    
     @Prop({ required: true })
     roomNumber: number;
-
+    
     @Prop()
     floor?: number;
 
-    @Prop({ required: true, default: 1 })
-    roomMaxCapacity: number;
+    @Prop()
+    doctor?: string;
+
+    @Prop()
+    nurses?: string[];
+    
+        // @Prop({ required: true, enum: ["ICU", "General", "Private", "OT"]  })
+        // type: string;
+    
+        // @Prop({ required: true, enum: ["Assign", "Unassign"], default: 'Unassign'})
+        // status: string;
+
+    // @Prop({ required: true, default: 1 })
+    // roomMaxCapacity: number;
+
+    // @Prop({required :true, default:1 })
+    // bedMaxCapacity: number;
 }
 
 export const RoomSchema = SchemaFactory.createForClass(Room);

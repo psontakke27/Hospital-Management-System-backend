@@ -29,6 +29,3 @@ async function bootstrap() {
 
 }
 bootstrap();
-// mongo db
-//sign up cha crud
-//login cha api la crud integrate

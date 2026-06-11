@@ -1,28 +1,27 @@
-import { Prop } from "@nestjs/mongoose";
-import { IsIn, IsMongoId, IsNotEmpty, IsNumber, IsString } from "class-validator"
-
+import { Prop } from '@nestjs/mongoose';
+import {
+  IsIn,
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 
 export class CreateRoomDto {
-    @IsMongoId()
-    departmentId: string;
+  @IsMongoId()
+  departmentId: string;
 
-    @IsString()
-    // @IsIn(["ICU", "General", "Private", "OT"])
-    type: string;
+   @IsMongoId()
+  hospitalId: string;
 
-    @IsString()
-    @IsIn(['active', 'inactive'])
-    status: string;
+  
+  @IsString()
+  floor: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-    roomNumber: number;
+  @IsString()
+  doctor?:string;
 
-    @IsString()
-    floor?: number;
-
-    @IsNumber()
-    roomMaxCapacity: number;
-
-
+  @IsString()
+  nurses?: string[];
+  
 }
